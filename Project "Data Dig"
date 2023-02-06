@@ -207,25 +207,25 @@ INSERT INTO picks (pick_number, name, college, picked_by, position)
 INSERT INTO picks (pick_number, name, college, picked_by, position)
 	VALUES(99,"Paul Dawson","TCU","Cincinnati","OLB");
 
-Draft picks ordered by position in the 2015 NFL draft.
+--Draft picks ordered by position in the 2015 NFL draft--
 SELECT * FROM picks ORDER BY position;
 
-This is the average pick of all the individual positions drafted.
+--This is the average pick of all the individual positions drafted--
 SELECT position, AVG(pick_number) FROM picks GROUP BY position;
 
-The total number of picks each team received in this draft.
+--The total number of picks each team received in this draft--
 SELECT picked_by, COUNT(*) FROM picks GROUP BY picked_by;
 
-This is a list of the teams that received more than 3 picks.
+--This is a list of the teams that received more than 3 picks--
 SELECT picked_by, COUNT(*) AS count FROM picks GROUP BY picked_by HAVING count >3;
 
-This is the LSU player picked in the top 50.
+--This is the LSU player picked in the top 50--
 SELECT * FROM picks WHERE college = "LSU" AND pick_number <50;
 
-These are all LSU players selected and all players selected by Dallas.
+--These are all LSU players selected and all players selected by Dallas--
 SELECT * FROM picks WHERE college = "LSU" OR picked_by = "Dallas";
 
-Here we can see the players listed by college and in which round they were selected.
+--Here we can see the players listed by college and in which round they were selected--
 SELECT *,
     CASE
         WHEN pick_number < 34 THEN "1st Round Pick"
