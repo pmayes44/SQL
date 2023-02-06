@@ -1,4 +1,4 @@
-Data Querying from the 2015 NFL Draft.
+``Data Querying from the 2015 NFL Draft``
 
 CREATE TABLE picks(
 	id INTEGER PRIMARY KEY,
