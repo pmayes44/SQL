@@ -1,0 +1,50 @@
+--Famous Singers--
+
+CREATE TABLE singers(id INTEGER PRIMARY KEY, name TEXT, hometown TEXT, state TEXT, age INTEGER);
+
+INSERT INTO singers (name,hometown,state,age) VALUES ("Taylor Swift","West Reading","Pennsylvania",33);
+INSERT INTO singers (name,hometown,state,age) VALUES ("Tim McGraw","Delhi","Louisiana",55);
+INSERT INTO singers (name,hometown,state,age) VALUES ("Faith Hill","Ridgeland","Mississippi",55);
+INSERT INTO singers (name,hometown,state,age) VALUES ("Reba McEntire","McAlester","Oklahoma",67);
+INSERT INTO singers (name,hometown,state,age) VALUES ("George Strait","Pearsall","Texas",70);
+
+CREATE TABLE songs(id INTEGER PRIMARY KEY, artist_id INTEGER, song TEXT);
+
+INSERT INTO songs (artist_id,song) VALUES (1,"Shake It Off");
+INSERT INTO songs (artist_id,song) VALUES (1,"Blank Space");
+INSERT INTO songs (artist_id,song) VALUES (1,"Bad Blood");
+INSERT INTO songs (artist_id,song) VALUES (2,"It's Your Love");
+INSERT INTO songs (artist_id,song) VALUES (2,"Just To See You Smile");
+INSERT INTO songs (artist_id,song) VALUES (2,"Live Like You Were Dying");
+INSERT INTO songs (artist_id,song) VALUES (3,"This Kiss");
+INSERT INTO songs (artist_id,song) VALUES (3,"Breathe");
+INSERT INTO songs (artist_id,song) VALUES (3,"The Way You Love Me");
+INSERT INTO songs (artist_id,song) VALUES (4,"The Last One To Know");
+INSERT INTO songs (artist_id,song) VALUES (4,"Whoever's In New England");
+INSERT INTO songs (artist_id,song) VALUES (4,"If You See Him");
+INSERT INTO songs (artist_id,song) VALUES (5,"Fool Hearted Memory");
+INSERT INTO songs (artist_id,song) VALUES (5,"Amarillo By Morning");
+INSERT INTO songs (artist_id,song) VALUES (5,"Does Fort Worth Ever Cross Your Mind");
+
+CREATE TABLE updated_info(id INTEGER PRIMARY KEY, artist_id INTEGER, residence TEXT, state TEXT, last_concert TEXT, next_scheduled_date TEXT);
+
+INSERT INTO updated_info(artist_id,residence,state,last_concert,next_scheduled_date) VALUES (1,"Nashville","Tennessee","11/21/2018","3/17/2023");
+INSERT INTO updated_info(artist_id,residence,state,last_concert,next_scheduled_date) VALUES (2,"Nashville","Tennessee","10/15/2022","2/11/2023");
+INSERT INTO updated_info(artist_id,residence,state,last_concert,next_scheduled_date) VALUES (3,"Nashville","Tennessee","10/29/2022","NULL");
+INSERT INTO updated_info(artist_id,residence,state,last_concert,next_scheduled_date) VALUES (4,"Nashville","Tennessee","12/16/2022","3/9/2023");
+INSERT INTO updated_info(artist_id,residence,state,last_concert,next_scheduled_date) VALUES (5,"Boerne","Texas","12/3/2022","5/6/2023");
+
+--Joins the singers from table 1 with their corresponding songs from table 2--
+SELECT  singers.name, songs.song FROM singers
+JOIN songs
+ON songs.artist_id=singers.id;
+
+--Joins the data from table 1 and table 3 to show the singers names, hometown and current resisdence--
+SELECT singers.name, singers.hometown, singers.state, updated_info.residence AS current_residence, updated_info.state FROM singers
+JOIN updated_info
+ON singers.id=updated_info.artist_id;
+
+--Also joins the data from table 1 and table 3 to show a different set of results: last performance and next performance--
+SELECT singers.name, updated_info.last_concert AS last_performance, updated_info.next_scheduled_date AS next_performance FROM singers
+JOIN updated_info
+ON singers.id=updated_info.artist_id;
